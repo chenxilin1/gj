@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gj.mapper.TbEnterpriseMapper" >
+  <resultMap id="BaseResultMap" type="com.example.gj.entities.TbEnterprise" >
+    <id column="cbecodeinsp" property="cbecodeinsp" jdbcType="VARCHAR" />
+    <result column="Cbename" property="cbename" jdbcType="VARCHAR" />
+    <result column="Type" property="type" jdbcType="VARCHAR" />
+    <result column="Audit_type" property="auditType" jdbcType="VARCHAR" />
+    <result column="stauts" property="stauts" jdbcType="VARCHAR" />
+    <result column="Person" property="person" jdbcType="VARCHAR" />
+    <result column="Create_Time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cbecodeinsp, Cbename, Type, Audit_type, stauts, Person, Create_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.gj.entities.TbEnterpriseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_enterprise
+    where cbecodeinsp = #{cbecodeinsp,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_enterprise
+    where cbecodeinsp = #{cbecodeinsp,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.gj.entities.TbEnterpriseExample" >
+    delete from tb_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.gj.entities.TbEnterprise" >
+    insert into tb_enterprise (cbecodeinsp, Cbename, Type, 
+      Audit_type, stauts, Person, 
+      Create_Time)
+    values (#{cbecodeinsp,jdbcType=VARCHAR}, #{cbename,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{auditType,jdbcType=VARCHAR}, #{stauts,jdbcType=VARCHAR}, #{person,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.gj.entities.TbEnterprise" >
+    insert into tb_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cbecodeinsp != null" >
+        cbecodeinsp,
+      </if>
+      <if test="cbename != null" >
+        Cbename,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="auditType != null" >
+        Audit_type,
+      </if>
+      <if test="stauts != null" >
+        stauts,
+      </if>
+      <if test="person != null" >
+        Person,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cbecodeinsp != null" >
+        #{cbecodeinsp,jdbcType=VARCHAR},
+      </if>
+      <if test="cbename != null" >
+        #{cbename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null" >
+        #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="stauts != null" >
+        #{stauts,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null" >
+        #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.gj.entities.TbEnterpriseExample" resultType="java.lang.Integer" >
+    select count(*) from tb_enterprise
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_enterprise
+    <set >
+      <if test="record.cbecodeinsp != null" >
+        cbecodeinsp = #{record.cbecodeinsp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbename != null" >
+        Cbename = #{record.cbename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        Type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditType != null" >
+        Audit_type = #{record.auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stauts != null" >
+        stauts = #{record.stauts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.person != null" >
+        Person = #{record.person,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_enterprise
+    set cbecodeinsp = #{record.cbecodeinsp,jdbcType=VARCHAR},
+      Cbename = #{record.cbename,jdbcType=VARCHAR},
+      Type = #{record.type,jdbcType=VARCHAR},
+      Audit_type = #{record.auditType,jdbcType=VARCHAR},
+      stauts = #{record.stauts,jdbcType=VARCHAR},
+      Person = #{record.person,jdbcType=VARCHAR},
+      Create_Time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.gj.entities.TbEnterprise" >
+    update tb_enterprise
+    <set >
+      <if test="cbename != null" >
+        Cbename = #{cbename,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="auditType != null" >
+        Audit_type = #{auditType,jdbcType=VARCHAR},
+      </if>
+      <if test="stauts != null" >
+        stauts = #{stauts,jdbcType=VARCHAR},
+      </if>
+      <if test="person != null" >
+        Person = #{person,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cbecodeinsp = #{cbecodeinsp,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.gj.entities.TbEnterprise" >
+    update tb_enterprise
+    set Cbename = #{cbename,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      Audit_type = #{auditType,jdbcType=VARCHAR},
+      stauts = #{stauts,jdbcType=VARCHAR},
+      Person = #{person,jdbcType=VARCHAR},
+      Create_Time = #{createTime,jdbcType=TIMESTAMP}
+    where cbecodeinsp = #{cbecodeinsp,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

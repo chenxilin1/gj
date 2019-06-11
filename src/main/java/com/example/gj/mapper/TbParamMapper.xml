@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gj.mapper.TbParamMapper" >
+  <resultMap id="BaseResultMap" type="com.example.gj.entities.TbParam" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="Pid" property="pid" jdbcType="VARCHAR" />
+    <result column="Param_type" property="paramType" jdbcType="VARCHAR" />
+    <result column="Param_code" property="paramCode" jdbcType="VARCHAR" />
+    <result column="Param_value" property="paramValue" jdbcType="VARCHAR" />
+    <result column="Create_Time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+    <insert id="add">
+          insert into tb_param (id, Pid, Param_type,
+      Param_code, Param_value, Create_Time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{paramType,jdbcType=VARCHAR},
+      #{paramCode,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+    </insert>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, Pid, Param_type, Param_code, Param_value, Create_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.gj.entities.TbParamExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_param
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_param
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_param
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.gj.entities.TbParamExample" >
+    delete from tb_param
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.gj.entities.TbParam" >
+    insert into tb_param (id, Pid, Param_type, 
+      Param_code, Param_value, Create_Time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{paramType,jdbcType=VARCHAR}, 
+      #{paramCode,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.gj.entities.TbParam" >
+    insert into tb_param
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pid != null" >
+        Pid,
+      </if>
+      <if test="paramType != null" >
+        Param_type,
+      </if>
+      <if test="paramCode != null" >
+        Param_code,
+      </if>
+      <if test="paramValue != null" >
+        Param_value,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramCode != null" >
+        #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.gj.entities.TbParamExample" resultType="java.lang.Integer" >
+    select count(*) from tb_param
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_param
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        Pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramType != null" >
+        Param_type = #{record.paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramCode != null" >
+        Param_code = #{record.paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramValue != null" >
+        Param_value = #{record.paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_param
+    set id = #{record.id,jdbcType=VARCHAR},
+      Pid = #{record.pid,jdbcType=VARCHAR},
+      Param_type = #{record.paramType,jdbcType=VARCHAR},
+      Param_code = #{record.paramCode,jdbcType=VARCHAR},
+      Param_value = #{record.paramValue,jdbcType=VARCHAR},
+      Create_Time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.gj.entities.TbParam" >
+    update tb_param
+    <set >
+      <if test="pid != null" >
+        Pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null" >
+        Param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="paramCode != null" >
+        Param_code = #{paramCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null" >
+        Param_value = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.gj.entities.TbParam" >
+    update tb_param
+    set Pid = #{pid,jdbcType=VARCHAR},
+      Param_type = #{paramType,jdbcType=VARCHAR},
+      Param_code = #{paramCode,jdbcType=VARCHAR},
+      Param_value = #{paramValue,jdbcType=VARCHAR},
+      Create_Time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="findByType" resultMap="BaseResultMap">
+        select id,pid,Param_type,Param_code,Param_value,Create_Time from tb_param where Param_type=#{a}
+    </select>
+</mapper>

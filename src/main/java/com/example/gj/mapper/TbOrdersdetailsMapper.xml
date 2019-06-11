@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.gj.mapper.TbOrdersdetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.example.gj.entities.TbOrdersdetails" >
+    <id column="ordersDetails_no" property="ordersdetailsNo" jdbcType="VARCHAR" />
+    <result column="orders_no" property="ordersNo" jdbcType="VARCHAR" />
+    <result column="Goods_no" property="goodsNo" jdbcType="VARCHAR" />
+    <result column="Goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="Goodsinsp" property="goodsinsp" jdbcType="VARCHAR" />
+    <result column="Goods_price" property="goodsPrice" jdbcType="REAL" />
+    <result column="Goods_number" property="goodsNumber" jdbcType="INTEGER" />
+    <result column="Total" property="total" jdbcType="REAL" />
+    <result column="Create_Time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ordersDetails_no, orders_no, Goods_no, Goods_name, Goodsinsp, Goods_price, Goods_number, 
+    Total, Create_Time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.gj.entities.TbOrdersdetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_ordersdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ordersdetails
+    where ordersDetails_no = #{ordersdetailsNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_ordersdetails
+    where ordersDetails_no = #{ordersdetailsNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.gj.entities.TbOrdersdetailsExample" >
+    delete from tb_ordersdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.gj.entities.TbOrdersdetails" >
+    insert into tb_ordersdetails (ordersDetails_no, orders_no, Goods_no, 
+      Goods_name, Goodsinsp, Goods_price, 
+      Goods_number, Total, Create_Time
+      )
+    values (#{ordersdetailsNo,jdbcType=VARCHAR}, #{ordersNo,jdbcType=VARCHAR}, #{goodsNo,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsinsp,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=REAL}, 
+      #{goodsNumber,jdbcType=INTEGER}, #{total,jdbcType=REAL}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.gj.entities.TbOrdersdetails" >
+    insert into tb_ordersdetails
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordersdetailsNo != null" >
+        ordersDetails_no,
+      </if>
+      <if test="ordersNo != null" >
+        orders_no,
+      </if>
+      <if test="goodsNo != null" >
+        Goods_no,
+      </if>
+      <if test="goodsName != null" >
+        Goods_name,
+      </if>
+      <if test="goodsinsp != null" >
+        Goodsinsp,
+      </if>
+      <if test="goodsPrice != null" >
+        Goods_price,
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_number,
+      </if>
+      <if test="total != null" >
+        Total,
+      </if>
+      <if test="createTime != null" >
+        Create_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordersdetailsNo != null" >
+        #{ordersdetailsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersNo != null" >
+        #{ordersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNo != null" >
+        #{goodsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinsp != null" >
+        #{goodsinsp,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        #{goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=REAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.gj.entities.TbOrdersdetailsExample" resultType="java.lang.Integer" >
+    select count(*) from tb_ordersdetails
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_ordersdetails
+    <set >
+      <if test="record.ordersdetailsNo != null" >
+        ordersDetails_no = #{record.ordersdetailsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordersNo != null" >
+        orders_no = #{record.ordersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsNo != null" >
+        Goods_no = #{record.goodsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null" >
+        Goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsinsp != null" >
+        Goodsinsp = #{record.goodsinsp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsPrice != null" >
+        Goods_price = #{record.goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="record.goodsNumber != null" >
+        Goods_number = #{record.goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.total != null" >
+        Total = #{record.total,jdbcType=REAL},
+      </if>
+      <if test="record.createTime != null" >
+        Create_Time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_ordersdetails
+    set ordersDetails_no = #{record.ordersdetailsNo,jdbcType=VARCHAR},
+      orders_no = #{record.ordersNo,jdbcType=VARCHAR},
+      Goods_no = #{record.goodsNo,jdbcType=VARCHAR},
+      Goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      Goodsinsp = #{record.goodsinsp,jdbcType=VARCHAR},
+      Goods_price = #{record.goodsPrice,jdbcType=REAL},
+      Goods_number = #{record.goodsNumber,jdbcType=INTEGER},
+      Total = #{record.total,jdbcType=REAL},
+      Create_Time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.gj.entities.TbOrdersdetails" >
+    update tb_ordersdetails
+    <set >
+      <if test="ordersNo != null" >
+        orders_no = #{ordersNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNo != null" >
+        Goods_no = #{goodsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null" >
+        Goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsinsp != null" >
+        Goodsinsp = #{goodsinsp,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null" >
+        Goods_price = #{goodsPrice,jdbcType=REAL},
+      </if>
+      <if test="goodsNumber != null" >
+        Goods_number = #{goodsNumber,jdbcType=INTEGER},
+      </if>
+      <if test="total != null" >
+        Total = #{total,jdbcType=REAL},
+      </if>
+      <if test="createTime != null" >
+        Create_Time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ordersDetails_no = #{ordersdetailsNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.gj.entities.TbOrdersdetails" >
+    update tb_ordersdetails
+    set orders_no = #{ordersNo,jdbcType=VARCHAR},
+      Goods_no = #{goodsNo,jdbcType=VARCHAR},
+      Goods_name = #{goodsName,jdbcType=VARCHAR},
+      Goodsinsp = #{goodsinsp,jdbcType=VARCHAR},
+      Goods_price = #{goodsPrice,jdbcType=REAL},
+      Goods_number = #{goodsNumber,jdbcType=INTEGER},
+      Total = #{total,jdbcType=REAL},
+      Create_Time = #{createTime,jdbcType=TIMESTAMP}
+    where ordersDetails_no = #{ordersdetailsNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

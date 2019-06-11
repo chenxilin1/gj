@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="../layui-v2.4.5/layui/css/layui.css">
+    <script src="../layui-v2.4.5/layui/layui.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" >国检管理平台</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <!--<ul class="layui-nav layui-layout-left">-->
+            <!--<li class="layui-nav-item"><a href="">控制台</a></li>-->
+            <!--<li class="layui-nav-item"><a href="">商品管理</a></li>-->
+            <!--<li class="layui-nav-item"><a href="">用户</a></li>-->
+            <!--<li class="layui-nav-item">-->
+                <!--<a href="javascript:;">其它系统</a>-->
+                <!--<dl class="layui-nav-child">-->
+                    <!--<dd><a href="">邮件管理</a></dd>-->
+                    <!--<dd><a href="">消息管理</a></dd>-->
+                    <!--<dd><a href="">授权管理</a></dd>-->
+                <!--</dl>-->
+            <!--</li>-->
+        <!--</ul>-->
+        <ul class="layui-nav layui-layout-right">
+
+            <li class="layui-nav-item" th:text="  登录时间+${time}"></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1559118668&di=3450c84e9f94f532739a9f8fe80f5704&src=http://pic11.nipic.com/20101117/70384_134856054703_2.jpg" class="layui-nav-img">
+                    嘟嘟嘟
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">人工审单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/gj?a=1">人工审单</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">负面清单管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="two/b">负面清单</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">查验管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="three/b">清单查验</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">禁止出境</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="four/b">禁止出境（初审）</a></dd>
+                        <dd><a href="fourr/b">禁止出境（复审）</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">查询统计</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="five/b">清单查询</a></dd>
+                        <dd><a href="fivee/b">清单放行查询</a></dd>
+                        <dd><a href="fivee/bbb">禁止出境查询</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="zidong/a">自动审单比例维护</a></dd>
+                        <dd><a href="/zidongg/a">负面清单规则维护</a></dd>
+                    </dl>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">内容主体区域</div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
+</div>
+<script src="layui-v2.4.5/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>
